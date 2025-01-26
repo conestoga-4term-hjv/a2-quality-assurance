@@ -15,27 +15,28 @@ namespace eCommerce_Tests
 
         #region Constructor Tests
 
-        // For this test I'm testing the creation of a valid Product
-        // I design this one to make sure the Product constructor is correctly creating objects
+        // For this test, I'm testing the creation of a valid Product
+        // I design this one to make sure the Product constructor is correctly creating valid objects
         [Test]
         public void Constructor_ValidInput_ShouldCreateProduct()
         {
             // Arrange
-            int prodID = 100;
-            string prodName = "Test Product";
-            int itemPrice = 500;
-            int stockAmount = 50;
+            int validProdID = 100;
+            string validProdName = "Test Product";
+            int validItemPrice = 500;
+            int validStockAmount = 50;
 
             // Act
-            Products product = new Products(prodID, prodName, itemPrice, stockAmount);
+            Products product = new Products(validProdID, validProdName, validItemPrice, validStockAmount);
 
             // Assert
-            Assert.That(product.ProdID, Is.EqualTo(prodID));
-            Assert.That(product.ProdName, Is.EqualTo(prodName));
-            Assert.That(product.ItemPrice, Is.EqualTo(itemPrice));
-            Assert.That(product.StockAmount, Is.EqualTo(stockAmount));
+            Assert.That(product.ProdID, Is.EqualTo(validProdID));
+            Assert.That(product.ProdName, Is.EqualTo(validProdName));
+            Assert.That(product.ItemPrice, Is.EqualTo(validItemPrice));
+            Assert.That(product.StockAmount, Is.EqualTo(validStockAmount));
         }
-
+        // For this test, I'm testing creation with an invalid stock, a negative one, more precisely
+        // I designed this one because it could be a very problematic one if it occurs, and it is also very easy to occur
         [Test]
         public void Constructor_NegativeStockAmount_ShouldThrowArgumentOutOfRangeException()
         {
@@ -51,6 +52,25 @@ namespace eCommerce_Tests
 
             // Assert
             Assert.That(ex.Message, Does.Contain("Stock amount must be between 1 and 100,000."));
+        }
+
+        // For this test, I'm testing creation with a value higher than the accepted value
+        // I designed this one because users might assign value wrongly, and we need to make sure the system is catching that
+        [Test]
+        public void Constructor_10001PriceValue_ShouldThrowArgumentOutOfRangeException()
+        {
+            // Arrange
+            int validProdID = 102;
+            string validProdName = "Test Product";
+            int invalidItemPrice = 10001;
+            int validStockAmount = 1;
+
+            // Act
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new Products(validProdID, validProdName, invalidItemPrice, validStockAmount));
+
+            // Assert
+            Assert.That(ex.Message, Does.Contain("Item price must be between $10 and $10,000."));
         }
 
         #endregion

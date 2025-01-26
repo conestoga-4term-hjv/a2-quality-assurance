@@ -94,6 +94,31 @@ namespace eCommerce_Tests
 
         #endregion
 
+        #region Increase/Descrease
+
+        // For this test, I'm testing increasing the stock to a value that exceeds the maximum capacity
+        // Exceeding the maximum capacity should be a common error, as such, we need to cover it 
+        [Test]
+        public void IncreaseStock_ExceedsMax_ShouldThrowInvalidOperationException()
+        {
+            // Arrange
+            int validProdID = 100;
+            string validProdName = "Test Product";
+            int validItemPrice = 500;
+            int validStockAmount = 50;
+
+            Products validProduct = new Products(validProdID, validProdName, validItemPrice, validStockAmount);
+
+            int increaseAmount = 100001;
+
+            // Act
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => validProduct.IncreaseStock(increaseAmount));
+
+            // Assert
+            Assert.That(ex.Message, Does.Contain("Stock amount cannot exceed 100,000."));
+        }
+
+        #endregion
 
         #endregion
 

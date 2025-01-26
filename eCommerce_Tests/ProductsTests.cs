@@ -140,7 +140,28 @@ namespace eCommerce_Tests
             Assert.That(ex.Message, Does.Contain("Stock amount cannot be less than 1."));
         }
 
-        
+        // For this test, I'm testing decreasing the stock by a valid amount
+        // This test is design to make sure the stock is being decreased correctly
+        [Test]
+        public void DescreaseStock_ValidAmount10_ShouldDecreaseStock()
+        {
+            // Arrange
+            int validProdID = 100;
+            string validProdName = "Test Product";
+            int validItemPrice = 500;
+            int validStockAmount = 50;
+
+            Products validProduct = new Products(validProdID, validProdName, validItemPrice, validStockAmount);
+
+            int descreaseAmount = 10;
+
+            // Act
+            validProduct.DecreaseStock(descreaseAmount);
+
+            // Assert
+            Assert.That(validProduct.StockAmount, Is.EqualTo(40));
+        }
+
 
         #endregion
 

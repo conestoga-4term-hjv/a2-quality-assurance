@@ -11,7 +11,35 @@ namespace eCommerce_Tests
     [TestFixture]
     public class ProductsTests
     {
-        
+        #region Venicio Tests       
+
+        #region Constructor Tests
+
+        // For this test Í'm testing the creation of a valid Product
+        // I design this one to make sure the Product constructor is correctly creating objects
+        [Test]
+        public void Constructor_ValidInput_ShouldCreateProduct()
+        {
+            // Arrange
+            int prodID = 100;
+            string prodName = "Test Product";
+            int itemPrice = 500;
+            int stockAmount = 50;
+
+            // Act
+            Products product = new Products(prodID, prodName, itemPrice, stockAmount);
+
+            // Assert
+            Assert.That(product.ProdID, Is.EqualTo(prodID));
+            Assert.That(product.ProdName, Is.EqualTo(prodName));
+            Assert.That(product.ItemPrice, Is.EqualTo(itemPrice));
+            Assert.That(product.StockAmount, Is.EqualTo(stockAmount));
+        }
+
+        #endregion
+
+
+        #endregion
 
     }
 }

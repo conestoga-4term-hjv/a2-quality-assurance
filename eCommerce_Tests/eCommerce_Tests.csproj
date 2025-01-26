@@ -77,6 +77,12 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\A2_eCommerce\A2_eCommerce.csproj">
+      <Project>{ea876f7a-cb0c-43d4-9478-4ce3c0b5c0e9}</Project>
+      <Name>A2_eCommerce</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

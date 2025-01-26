@@ -118,6 +118,30 @@ namespace eCommerce_Tests
             Assert.That(ex.Message, Does.Contain("Stock amount cannot exceed 100,000."));
         }
 
+        // For this test, I'm testing decreasing the stock below zero
+        // Selling more items than you have should be a common error to occur, and the system should prevent that
+        [Test]
+        public void DescreaseStock_LessThanCurrentStock_ShouldThrowInvalidOperationException()
+        {
+            // Arrange
+            int validProdID = 100;
+            string validProdName = "Test Product";
+            int validItemPrice = 500;
+            int validStockAmount = 10;
+
+            Products validProduct = new Products(validProdID, validProdName, validItemPrice, validStockAmount);
+
+            int descreaseAmount = 11;
+
+            // Act
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => validProduct.DecreaseStock(descreaseAmount));
+
+            // Assert
+            Assert.That(ex.Message, Does.Contain("Stock amount cannot be less than 1."));
+        }
+
+        
+
         #endregion
 
         #endregion

@@ -73,6 +73,25 @@ namespace eCommerce_Tests
             Assert.That(ex.Message, Does.Contain("Item price must be between $10 and $10,000."));
         }
 
+        // For this test, I'm testing creation with an invalid ProductID
+        // This should be a fairly common error and the system should be able to catch it
+        [Test]
+        public void Constructor_InvalidProductID_ShouldThrowArgumentOutOfRangeException()
+        {
+            // Arrange
+            int invalidProdID = 5;
+            string validProdName = "Test Product";
+            int validItemPrice = 1000;
+            int validStockAmount = 10;
+
+            // Act
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new Products(invalidProdID, validProdName, validItemPrice, validStockAmount));
+
+            // Assert
+            Assert.That(ex.Message, Does.Contain("Product ID must be between 10 and 100000."));
+        }
+
         #endregion
 
 

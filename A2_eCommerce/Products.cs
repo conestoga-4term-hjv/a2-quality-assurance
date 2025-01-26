@@ -15,7 +15,7 @@ namespace A2_eCommerce
 
         public Products(int prodID, string prodName, int itemPrice, int stockAmount) {
             if (prodID < 10 || prodID > 100000)
-                throw new ArgumentOutOfRangeException(nameof(prodID), "ProdID must be between 10 and 100000.");
+                throw new ArgumentOutOfRangeException(nameof(prodID), "Product ID must be between 10 and 100000.");
             if (itemPrice < 10 || itemPrice > 10000)
                 throw new ArgumentOutOfRangeException(nameof(itemPrice), "Item price must be between $10 and $10,000.");
             if (stockAmount < 1 || stockAmount > 100000)

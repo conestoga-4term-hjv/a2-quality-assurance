@@ -15,7 +15,7 @@ namespace eCommerce_Tests
 
         #region Constructor Tests
 
-        // For this test Í'm testing the creation of a valid Product
+        // For this test I'm testing the creation of a valid Product
         // I design this one to make sure the Product constructor is correctly creating objects
         [Test]
         public void Constructor_ValidInput_ShouldCreateProduct()
@@ -34,6 +34,23 @@ namespace eCommerce_Tests
             Assert.That(product.ProdName, Is.EqualTo(prodName));
             Assert.That(product.ItemPrice, Is.EqualTo(itemPrice));
             Assert.That(product.StockAmount, Is.EqualTo(stockAmount));
+        }
+
+        [Test]
+        public void Constructor_NegativeStockAmount_ShouldThrowArgumentOutOfRangeException()
+        {
+            // Arrange
+            int validProdID = 101;
+            string validProdName = "Test Product";
+            int validItemPrice = 500;
+            int invalidStockAmount = -10;
+
+            // Act
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new Products(validProdID, validProdName, validItemPrice, invalidStockAmount));
+
+            // Assert
+            Assert.That(ex.Message, Does.Contain("Stock amount must be between 1 and 100,000."));
         }
 
         #endregion

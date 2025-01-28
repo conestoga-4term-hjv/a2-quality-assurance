@@ -167,5 +167,36 @@ namespace eCommerce_Tests
 
         #endregion
 
+        #region Eduardo Tests
+
+        #region Constructor Tests
+
+        // Test for Product creation with a null product name
+        // I created this test to check the validation of a null Product Name (shouldn't pass)
+        [Test]
+        public void Constructor_NullProdName_ShouldThrowArgumentNullException()
+        {
+            // Arrange
+            int validProdID = 100;
+            string invalidProdName = null;
+            int validItemPrice = 500;
+            int validStockAmount = 50;
+
+            // Act
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                new Products(validProdID, invalidProdName, validItemPrice, validStockAmount));
+
+            // Assert
+            Assert.That(ex.Message, Does.Contain("Value cannot be null."));
+        }
+
+
+        #endregion
+
+        #region Increase/Descrease
+
+        #endregion
+
+        #endregion
     }
 }

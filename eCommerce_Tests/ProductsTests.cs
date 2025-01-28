@@ -177,7 +177,7 @@ namespace eCommerce_Tests
         public void Constructor_NullProdName_ShouldThrowArgumentNullException()
         {
             // Arrange
-            int validProdID = 100;
+            int validProdID = 200;
             string invalidProdName = null;
             int validItemPrice = 500;
             int validStockAmount = 50;
@@ -190,7 +190,24 @@ namespace eCommerce_Tests
             Assert.That(ex.Message, Does.Contain("Value cannot be null."));
         }
 
+        // Test for Product creation with a invalid stock amount 
+        // I created this one to check the upper boundary of the stock amount
+        [Test]
+        public void Constructor_OverMaxStockAmount_ShouldThrowArgumentOutOfRangeException()
+        {
+            // Arrange
+            int validProdID = 201;
+            string validProdName = "Test Product";
+            int validItemPrice = 500;
+            int invalidStockAmount = 100001;
 
+            // Act
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new Products(validProdID, validProdName, validItemPrice, invalidStockAmount));
+
+            // Assert
+            Assert.That(ex.Message, Does.Contain("Stock amount must be between 1 and 100,000."));
+        }
         #endregion
 
         #region Increase/Descrease

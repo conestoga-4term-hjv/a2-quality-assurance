@@ -232,7 +232,7 @@ namespace eCommerce_Tests
         #region Increase/Descrease
 
         // Test increasing stock using default parameter
-        // Testing if the default funcionality is working properlly (shound work fine) 
+        // Testing if the default funcionality is working properlly (should work fine) 
         [Test]
         public void IncreaseStock_DefaultAmount_ShouldIncreaseStockBy1()
         {
@@ -249,6 +249,26 @@ namespace eCommerce_Tests
 
             // Assert
             Assert.That(validProduct.StockAmount, Is.EqualTo(51));
+        }
+
+        // Test decreasing stock using default parameter
+        // Testing if the default funcionality is working properlly (should work fine)
+        [Test]
+        public void DecreaseStock_DefaultAmount_ShouldDecreaseStockBy1()
+        {
+            // Arrange
+            int validProdID = 201;
+            string validProdName = "Test Product";
+            int validItemPrice = 500;
+            int validStockAmount = 50;
+
+            Products validProduct = new Products(validProdID, validProdName, validItemPrice, validStockAmount);
+
+            // Act
+            validProduct.DecreaseStock();
+
+            // Assert
+            Assert.That(validProduct.StockAmount, Is.EqualTo(49));
         }
 
         #endregion

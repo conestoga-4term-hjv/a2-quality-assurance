@@ -171,8 +171,8 @@ namespace eCommerce_Tests
 
         #region Constructor Tests
 
-        // Test for Product creation with a null product name
-        // I created this test to check the validation of a null Product Name (shouldn't pass)
+        // Test for Product constructor with a null product name
+        // I created this test to check the validation of a null Product Name (shouldn't be allowed)
         [Test]
         public void Constructor_NullProdName_ShouldThrowArgumentNullException()
         {
@@ -190,8 +190,8 @@ namespace eCommerce_Tests
             Assert.That(ex.Message, Does.Contain("Value cannot be null."));
         }
 
-        // Test for Product creation with a invalid stock amount 
-        // I created this one to check the upper boundary of the stock amount
+        // Test for Product constructor with a invalid stock amount 
+        // I created this one to check the upper boundary of the stock amount (shouldn't be allowed)
         [Test]
         public void Constructor_OverMaxStockAmount_ShouldThrowArgumentOutOfRangeException()
         {
@@ -207,6 +207,25 @@ namespace eCommerce_Tests
 
             // Assert
             Assert.That(ex.Message, Does.Contain("Stock amount must be between 1 and 100,000."));
+        }
+
+        // Test for Product constructor with a invalid product ID
+        // I created this one to check the upper boundary of the product ID (shouldn't be allowed)
+        [Test]
+        public void Constructor_OverMaxProductID_ShouldThrowArgumentOutOfRangeException()
+        {
+            // Arrange
+            int invalidProdID = 100001;
+            string validProdName = "Test Product";
+            int validItemPrice = 500;
+            int validStockAmount = 100;
+
+            // Act
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new Products(invalidProdID, validProdName, validItemPrice, validStockAmount));
+
+            // Assert
+            Assert.That(ex.Message, Does.Contain("Product ID must be between 10 and 100000."));
         }
         #endregion
 

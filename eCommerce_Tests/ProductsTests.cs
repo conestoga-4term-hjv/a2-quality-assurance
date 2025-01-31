@@ -174,58 +174,61 @@ namespace eCommerce_Tests
         // Test for Product constructor with a null product name
         // I created this test to check the validation of a null Product Name (shouldn't be allowed)
         [Test]
-        public void Constructor_NullProdName_ShouldThrowArgumentNullException()
+        public void ProdName_null_ShouldThrowArgumentNullException()
         {
             // Arrange
             int validProdID = 200;
             string invalidProdName = null;
             int validItemPrice = 500;
             int validStockAmount = 50;
+            string message = "Value cannot be null.";
 
             // Act
             ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
                 new Products(validProdID, invalidProdName, validItemPrice, validStockAmount));
 
             // Assert
-            Assert.That(ex.Message, Does.Contain("Value cannot be null."));
+            Assert.That(ex.Message, Does.Contain(message));
         }
 
         // Test for Product constructor with a invalid stock amount 
         // I created this one to check the upper boundary of the stock amount (shouldn't be allowed)
         [Test]
-        public void Constructor_OverMaxStockAmount_ShouldThrowArgumentOutOfRangeException()
+        public void StockAmount_100001_ShouldThrowArgumentOutOfRangeException()
         {
             // Arrange
             int validProdID = 201;
             string validProdName = "Test Product";
             int validItemPrice = 500;
             int invalidStockAmount = 100001;
+            string message = "Stock amount must be between 1 and 100,000.";
 
             // Act
             ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
                 new Products(validProdID, validProdName, validItemPrice, invalidStockAmount));
 
             // Assert
-            Assert.That(ex.Message, Does.Contain("Stock amount must be between 1 and 100,000."));
+            Assert.That(ex.Message, Does.Contain(message));
         }
 
         // Test for Product constructor with a invalid product ID
         // I created this one to check the upper boundary of the product ID (shouldn't be allowed)
         [Test]
-        public void Constructor_OverMaxProductID_ShouldThrowArgumentOutOfRangeException()
+        public void ProdID_100001_ShouldThrowArgumentOutOfRangeException()
         {
             // Arrange
             int invalidProdID = 100001;
             string validProdName = "Test Product";
             int validItemPrice = 500;
             int validStockAmount = 100;
+            string message = "Product ID must be between 10 and 100000.";
 
             // Act
             ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
                 new Products(invalidProdID, validProdName, validItemPrice, validStockAmount));
 
             // Assert
-            Assert.That(ex.Message, Does.Contain("Product ID must be between 10 and 100000."));
+            Assert.That(ex.Message, Does.Contain(message));
         }
         #endregion
 
@@ -234,13 +237,14 @@ namespace eCommerce_Tests
         // Test increasing stock using default parameter
         // Testing if the default funcionality is working properlly (should work fine) 
         [Test]
-        public void IncreaseStock_DefaultAmount_ShouldIncreaseStockBy1()
+        public void IncreaseStock_1_ShouldIncreaseStockBy1()
         {
             // Arrange
             int validProdID = 200;
             string validProdName = "Test Product";
             int validItemPrice = 500;
             int validStockAmount = 50;
+            int result = 51;
 
             Products validProduct = new Products(validProdID, validProdName, validItemPrice, validStockAmount);
 
@@ -248,19 +252,20 @@ namespace eCommerce_Tests
             validProduct.IncreaseStock();
 
             // Assert
-            Assert.That(validProduct.StockAmount, Is.EqualTo(51));
+            Assert.That(validProduct.StockAmount, Is.EqualTo(result));
         }
 
         // Test decreasing stock using default parameter
         // Testing if the default funcionality is working properlly (should work fine)
         [Test]
-        public void DecreaseStock_DefaultAmount_ShouldDecreaseStockBy1()
+        public void DecreaseStock_1_ShouldDecreaseStockBy1()
         {
             // Arrange
             int validProdID = 201;
             string validProdName = "Test Product";
             int validItemPrice = 500;
             int validStockAmount = 50;
+            int result = 49;
 
             Products validProduct = new Products(validProdID, validProdName, validItemPrice, validStockAmount);
 
@@ -268,28 +273,30 @@ namespace eCommerce_Tests
             validProduct.DecreaseStock();
 
             // Assert
-            Assert.That(validProduct.StockAmount, Is.EqualTo(49));
+            Assert.That(validProduct.StockAmount, Is.EqualTo(result));
         }
 
         // Test increasing stock by a valid custom amount
         // checking if the method is adding the correct amount
         [Test]
-        public void IncreaseStock_ValidCustomAmount_ShouldIncreaseStockBy20()
+        public void IncreaseStock_20_ShouldIncreaseStockBy20()
         {
             // Arrange
             int validProdID = 202;
             string validProdName = "Test Product";
             int validItemPrice = 500;
             int validStockAmount = 50;
+            int increaseAmount = 20;
+            int result = 70;
 
             Products validProduct = new Products(validProdID, validProdName, validItemPrice, validStockAmount);
-            int increaseAmount = 20;
+            
 
             // Act
             validProduct.IncreaseStock(increaseAmount);
 
             // Assert
-            Assert.That(validProduct.StockAmount, Is.EqualTo(70));
+            Assert.That(validProduct.StockAmount, Is.EqualTo(result));
         }
         #endregion
 

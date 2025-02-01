@@ -303,8 +303,34 @@ namespace eCommerce_Tests
             // Assert
             Assert.That(validProduct.StockAmount, Is.EqualTo(result));
         }
-        #endregion
+		#endregion
 
-        #endregion
-    }
+		#endregion
+
+		#region Humza Tests
+
+		#region Constructor Tests
+		// For this test, I am testing if the user enters a negative itemPrice
+		[Test]
+		public void ItemPrice_Negative10100_ShouldThrowArgumentOutofRangeException()
+		{
+			int validProdID = 300;
+			string validProdName = "Test Product";
+			int invalidItemPrice = -10100;
+			int validStockAmount = 25;
+			string message = "Item price must be between $10 and $10,000.";
+
+			// Act
+			ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+			 new Products(validProdID, validProdName, invalidItemPrice, validStockAmount));
+
+			// Assert
+			Assert.That(ex.Message, Does.Contain(message));
+
+		}
+
+		#endregion
+
+		#endregion
+	}
 }

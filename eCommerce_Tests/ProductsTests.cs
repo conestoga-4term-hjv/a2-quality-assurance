@@ -328,6 +328,24 @@ namespace eCommerce_Tests
 			Assert.That(ex.Message, Does.Contain(message));
 
 		}
+        // For this test, I am testing if user enters a negative id 
+        [Test]
+        public void ProdID_Negative300_ShouldThrowArgumentOutofRangeException()
+        {
+			int invalidProdID = -300;
+			string validProdName = "Test Product";
+			int validItemPrice = 700;
+			int validStockAmount = 80;
+            string message = "Product ID must be between 10 and 100000.";
+
+            // Act
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new Products(invalidProdID,validProdName,validItemPrice,validStockAmount));
+
+            // Assert
+            Assert.That(ex.Message, Does.Contain(message));
+
+		}
 
 		#endregion
 

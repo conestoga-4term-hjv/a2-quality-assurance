@@ -365,11 +365,12 @@ namespace eCommerce_Tests
 
 		}
 
-        #endregion
+		#endregion
 
-        #region Increase/Decrease
-        // For test, decrease stock by 100, should decrease by 100 ex: stock amount 500 - 100 = 400
-        [Test]
+		#region Increase/Decrease
+		// For this test, decrease stock by 100, should decrease by 100 ex: stock amount:500, 
+		// final result: 500 - 100 = 400
+		[Test]
         public void DecreaseStock_100_ShouldDecreaseBy100()
         {
 			// Arrange
@@ -389,8 +390,29 @@ namespace eCommerce_Tests
             Assert.That(validStock.StockAmount, Is.EqualTo(result));
 
 		}
-		#endregion
+        #endregion
 
+        // For this test, increase stock by 5000, shock increase by 5000 ex: stock amount: 5000
+        // final result = 5000 + 5000 = 10000
+        [Test]
+        public void IncreaseStock_5000_ShouldIncreaseBy5000()
+        {
+			// Arrange
+			int validProdID = 304;
+			string validProdName = "Test Product";
+			int validItemPrice = 2000;
+			int validStockAmount = 5000;
+			int increaseAmount = 5000;
+			int result = 10000;
+
+			Products validStock = new Products(validProdID, validProdName, validItemPrice, validStockAmount);
+
+			//Act 
+			validStock.IncreaseStock(increaseAmount);
+
+			// Assert
+			Assert.That(validStock.StockAmount, Is.EqualTo(result));
+		}
 		#endregion
 	}
 }

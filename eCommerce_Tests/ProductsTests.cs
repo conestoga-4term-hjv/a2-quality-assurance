@@ -312,7 +312,7 @@ namespace eCommerce_Tests
 		#region Constructor Tests
 		// For this test, I am testing if the user enters a negative itemPrice
 		[Test]
-		public void ItemPrice_Negative10100_ShouldThrowArgumentOutofRangeException()
+		public void ItemPrice_Negative10100_ShouldThrowArgumentOutOfRangeException()
 		{
 			int validProdID = 300;
 			string validProdName = "Test Product";
@@ -330,7 +330,7 @@ namespace eCommerce_Tests
 		}
         // For this test, I am testing if user enters a negative id 
         [Test]
-        public void ProdID_Negative300_ShouldThrowArgumentOutofRangeException()
+        public void ProdID_Negative300_ShouldThrowArgumentOutOfRangeException()
         {
 			int invalidProdID = -300;
 			string validProdName = "Test Product";
@@ -348,7 +348,7 @@ namespace eCommerce_Tests
 		}
         // For this test, I am testing if user enters a negative stock amount
         [Test]
-        public void StockAmount_Negative1000_ShouldThrowArgumentOutofRangeException()
+        public void StockAmount_Negative1000_ShouldThrowArgumentOutOfRangeException()
         {
             int validProdID = 302;
             string validProdName = "Test Product";

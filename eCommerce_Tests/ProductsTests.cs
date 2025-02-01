@@ -413,6 +413,29 @@ namespace eCommerce_Tests
 			// Assert
 			Assert.That(validStock.StockAmount, Is.EqualTo(result));
 		}
+
+        // For this test, increase stock by 25150, shock increase by 25150 ex: stock amount: 40000
+        // final result = 40000 + 20000 = 65150
+        [Test]
+        public void IncreaseStock_25150_ShouldIncreaseBy25150()
+        {
+			// Arrange
+			int validProdID = 305;
+			string validProdName = "Test Product";
+			int validItemPrice = 3000;
+			int validStockAmount = 40000;
+			int increaseAmount = 25150;
+			int result = 65150;
+
+			Products validStock = new Products(validProdID, validProdName, validItemPrice, validStockAmount);
+
+			//Act 
+			validStock.IncreaseStock(increaseAmount);
+
+			// Assert
+			Assert.That(validStock.StockAmount, Is.EqualTo(result));
+		}
+
 		#endregion
 	}
 }

@@ -346,6 +346,24 @@ namespace eCommerce_Tests
             Assert.That(ex.Message, Does.Contain(message));
 
 		}
+        // For this test, I am testing if user enters a negative stock amount
+        [Test]
+        public void StockAmount_Negative1000_ShouldThrowArgumentOutofRangeException()
+        {
+            int validProdID = 302;
+            string validProdName = "Test Product";
+            int validItemPrice = 750;
+            int invalidStockAmount = -1000;
+            string message = "Stock amount must be between 1 and 100,000.";
+
+            // Act 
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new Products(validProdID,validProdName,validItemPrice,invalidStockAmount));
+
+            // Assert
+            Assert.That(ex.Message, Does.Contain(message));
+
+		}
 
 		#endregion
 

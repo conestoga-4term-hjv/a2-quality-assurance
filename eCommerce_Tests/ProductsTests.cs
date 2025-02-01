@@ -365,6 +365,30 @@ namespace eCommerce_Tests
 
 		}
 
+        #endregion
+
+        #region Increase/Decrease
+        // For test, decrease stock by 100, should decrease by 100 ex: stock amount 500 - 100 = 400
+        [Test]
+        public void DecreaseStock_100_ShouldDecreaseBy100()
+        {
+			// Arrange
+			int validProdID = 303;
+			string validProdName = "Test Product";
+			int validItemPrice = 100;
+			int validStockAmount = 500;
+            int decreaseAmount = 100;
+            int result = 400;
+
+            Products validStock = new Products(validProdID, validProdName, validItemPrice, validStockAmount);
+
+            //Act 
+            validStock.DecreaseStock(decreaseAmount);
+
+            // Assert
+            Assert.That(validStock.StockAmount, Is.EqualTo(result));
+
+		}
 		#endregion
 
 		#endregion
